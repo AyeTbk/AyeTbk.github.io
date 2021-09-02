@@ -1,0 +1,12 @@
+{
+  "name": "wasmwow",
+  "version": "0.1.0",
+  "files": [
+    "wasmwow_bg.wasm",
+    "wasmwow.js",
+    "wasmwow.d.ts"
+  ],
+  "module": "wasmwow.js",
+  "types": "wasmwow.d.ts",
+  "sideEffects": false
+}

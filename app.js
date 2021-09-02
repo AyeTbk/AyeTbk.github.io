@@ -39,7 +39,8 @@ wasm_init()
                 ctx.stroke();
 
             } else if (cmd.Clear) {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = "#000";
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
             } else if (cmd.Rect) {
                 let pos = cmd.Rect.position;
                 let size = cmd.Rect.size;
@@ -108,6 +109,8 @@ wasm_init()
             let button = convert_keycode(ev.code);
             app.button_released(button);
         }
+
+        // TODO requestAnimationFrame
 
         // Main loop
         setInterval(function () {
