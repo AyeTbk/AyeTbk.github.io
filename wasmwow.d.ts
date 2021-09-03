@@ -50,6 +50,7 @@ export interface InitOutput {
   readonly app_image_loaded: (a: number, b: number) => void;
   readonly __wbindgen_malloc: (a: number) => number;
   readonly __wbindgen_realloc: (a: number, b: number, c: number) => number;
+  readonly __wbindgen_free: (a: number, b: number) => void;
 }
 
 /**
