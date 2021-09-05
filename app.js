@@ -37,7 +37,12 @@ wasm_init()
                 }
                 ctx.closePath();
                 ctx.stroke();
-
+            } else if (cmd.Text) {
+                let color = color_to_css(cmd.Text.color);
+                ctx.fillStyle = color;
+                let pos = cmd.Text.position;
+                ctx.font = '12px sans-serif';
+                ctx.fillText(cmd.Text.text, pos.x, pos.y);
             } else if (cmd.Clear) {
                 ctx.fillStyle = "#000";
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
