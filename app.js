@@ -1,6 +1,6 @@
 import wasm_init, { App } from "./wasmwow.js";
 import { SpriteLoader } from "./sprite_loader.js";
-import { version } from "./version.js"
+import { version } from "./version.js";
 
 // Display version
 document.getElementById("version").innerText = version
