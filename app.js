@@ -101,6 +101,19 @@ wasm_init()
 
             app.mouse_move(rel_x, rel_y);
         }
+        function convert_mouse_button(button) {
+            switch (button) {
+                case 0: return "MouseLeft";
+                case 2: return "MouseRight";
+                case 1: return "MouseMiddle";
+            }
+        }
+        window.onmousedown = function (ev) {
+            app.button_pressed(convert_mouse_button(ev.button));
+        }
+        window.onmouseup = function (ev) {
+            app.button_released(convert_mouse_button(ev.button));
+        }
         function convert_keycode(keycode) {
             if (typeof keycode !== "string") {
                 console.warn("bad keycode", keycode);
@@ -119,12 +132,17 @@ wasm_init()
             app.button_released(button);
         }
 
+
         // TODO requestAnimationFrame
 
         // Main loop
         setInterval(function () {
-            let v = app.update(0.01666);
-            handle_commands(v);
+            try {
+                let v = app.update(0.01666);
+                handle_commands(v);
+            } catch {
+                alert("Uh oh... my trash code caused an exception, see console.");
+            }
         }, 16);
 
     });
