@@ -30,8 +30,8 @@ wasm_init()
 
                 ctx.drawImage(image, pos.x, pos.y);
             } else if (cmd.Polygon) {
-                let color = color_to_css(cmd.Polygon.color);
-                ctx.strokeStyle = color;
+                ctx.strokeStyle = color_to_css(cmd.Polygon.color);
+                ctx.fillStyle = color_to_css({ ...cmd.Polygon.color, a: 0.25 });
 
                 let start = cmd.Polygon.vertices[0]
                 ctx.beginPath();
@@ -40,6 +40,7 @@ wasm_init()
                     ctx.lineTo(vert.x, vert.y);
                 }
                 ctx.closePath();
+                ctx.fill();
                 ctx.stroke();
             } else if (cmd.Text) {
                 let color = color_to_css(cmd.Text.color);
