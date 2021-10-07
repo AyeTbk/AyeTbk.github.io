@@ -1,1 +1,1 @@
-export let version = '2f121e0dd4b961a1ea96b9cb3bf6d141d5f87d75';
+export let version = '48244526605822558745a1ac897283176b01e59f';

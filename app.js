@@ -15,6 +15,7 @@ wasm_init()
         // Init canvas
         let canvas = document.getElementById("canvas")
         let ctx = canvas.getContext('2d', { alpha: false });
+        ctx.imageSmoothingEnabled = false; // No filtering
 
         function color_to_css({ r, g, b, a }) {
             return `rgba(${r * 100}%, ${g * 100}%, ${b * 100}%, ${a * 100}%)`;
@@ -48,6 +49,8 @@ wasm_init()
                 let pos = cmd.Text.position;
                 ctx.font = '12px sans-serif';
                 ctx.fillText(cmd.Text.text, pos.x, pos.y);
+            } else if (cmd.Camera) {
+                ctx.scale(cmd.Camera.zoom.x, cmd.Camera.zoom.y);
             } else if (cmd.Clear) {
                 ctx.fillStyle = "#000";
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -88,6 +91,9 @@ wasm_init()
                     console.error("command not recognized:", command, typeof command);
                 }
             }
+
+            // Reset canvas transform
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
         }
 
         // Init render size
