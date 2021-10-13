@@ -1,12 +1,12 @@
 {
-  "name": "wasmwow",
+  "name": "game-wasm",
   "version": "0.1.0",
   "files": [
-    "wasmwow_bg.wasm",
-    "wasmwow.js",
-    "wasmwow.d.ts"
+    "game_wasm_bg.wasm",
+    "game_wasm.js",
+    "game_wasm.d.ts"
   ],
-  "module": "wasmwow.js",
-  "types": "wasmwow.d.ts",
+  "module": "game_wasm.js",
+  "types": "game_wasm.d.ts",
   "sideEffects": false
 }

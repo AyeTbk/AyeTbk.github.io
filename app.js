@@ -1,4 +1,4 @@
-import wasm_init, { App } from "./wasmwow.js";
+import wasm_init, { App } from "./game_wasm.js";
 import { SpriteLoader } from "./sprite_loader.js";
 import { version } from "./version.js";
 
@@ -18,7 +18,11 @@ wasm_init()
         ctx.imageSmoothingEnabled = false; // No filtering
 
         function color_to_css({ r, g, b, a }) {
-            return `rgba(${r * 100}%, ${g * 100}%, ${b * 100}%, ${a * 100}%)`;
+            const gamma = 1.0 / 2.2;
+            const rr = Math.floor(Math.pow(r, gamma) * 255);
+            const gg = Math.floor(Math.pow(g, gamma) * 255);
+            const bb = Math.floor(Math.pow(b, gamma) * 255);
+            return `rgba(${rr}, ${gg}, ${bb}, ${a})`;
         }
 
         function render_to_canvas(cmd) {
@@ -32,7 +36,7 @@ wasm_init()
                 ctx.drawImage(image, pos.x, pos.y);
             } else if (cmd.Polygon) {
                 ctx.strokeStyle = color_to_css(cmd.Polygon.color);
-                ctx.fillStyle = color_to_css({ ...cmd.Polygon.color, a: 0.25 });
+                ctx.fillStyle = color_to_css({ ...cmd.Polygon.color, a: 0.5 });
 
                 let start = cmd.Polygon.vertices[0]
                 ctx.beginPath();
@@ -129,6 +133,7 @@ wasm_init()
             return keycode.replace("Digit", "Key");
         }
         window.onkeydown = function (ev) {
+            ev.preventDefault();
             if (ev.repeat) return;
             let button = convert_keycode(ev.code);
             app.button_pressed(button);
