@@ -14,33 +14,59 @@
             color: rgb(230, 235, 255);
 
             font-family: sans-serif;
+
+            overflow: hidden;
         }
 
-        .canvas-container {
-            display: flex;
-            justify-content: center;
+        #canvas {
+            width: 100%;
+            height: 100vh;
         }
 
-        header {
-            padding: 0 12px;
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100vh;
+            padding: 12px;
+
+            box-sizing: border-box;
+
+            user-select: none;
+
+
+        }
+
+        .version {
             font-size: 12px;
             text-align: right;
-            color: rgba(230, 235, 255, 10%);
+            color: rgba(230, 235, 255, 20%);
+        }
+
+        .info {
+            position: absolute;
+            bottom: 12px;
         }
     </style>
 </head>
 
 <body>
-    <header>
-        <p>v. <span id="version"></span></p>
-    </header>
     <div class="canvas-container">
         <canvas id="canvas" width="960" height="600"></canvas>
     </div>
-    <strong>Controls:</strong><br>
-    Move with WASD<br>
-    Zoom in with P / Zoom out with L<br>
-    Click to clip terrain (unstable)<br>
+    <div class="overlay">
+        <div class="version">
+            <p>v. <span id="version"></span></p>
+        </div>
+        <div class="info">
+            <strong>Controls:</strong><br>
+            Move with WASD<br>
+            Zoom in with P / Zoom out with L<br>
+            Click to clip terrain (unstable)<br>
+        </div>
+    </div>
 
     <script src="app.js" type="module"></script>
 </body>

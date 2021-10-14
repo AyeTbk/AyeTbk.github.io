@@ -12,10 +12,12 @@ wasm_init()
 
         let app = new App();
 
+        // Patch some browser stuff out
+        document.body.oncontextmenu = function () { return false; };
+
         // Init canvas
         let canvas = document.getElementById("canvas")
         let ctx = canvas.getContext('2d', { alpha: false });
-        ctx.imageSmoothingEnabled = false; // No filtering
 
         function color_to_css({ r, g, b, a }) {
             const gamma = 1.0 / 2.2;
@@ -101,10 +103,20 @@ wasm_init()
         }
 
         // Init render size
-        let canvas_rect = canvas.getBoundingClientRect();
-        app.set_canvas_size(canvas_rect.width, canvas_rect.height);
+        function update_canvas_size() {
+            let canvas_rect = canvas.getBoundingClientRect();
+            canvas.width = canvas_rect.width;
+            canvas.height = canvas_rect.height;
+            app.set_canvas_size(canvas.width, canvas.height);
+
+            ctx.imageSmoothingEnabled = false; // No filtering
+        }
+        update_canvas_size();
 
         // Hookup events
+        window.onresize = function (ev) {
+            update_canvas_size();
+        }
         document.onmousemove = function (ev) {
             let canvas_rect = canvas.getBoundingClientRect();
             let rel_x = ev.clientX - canvas_rect.left;
@@ -133,7 +145,9 @@ wasm_init()
             return keycode.replace("Digit", "Key");
         }
         window.onkeydown = function (ev) {
-            ev.preventDefault();
+            if (ev.code !== "F12") {
+                ev.preventDefault();
+            }
             if (ev.repeat) return;
             let button = convert_keycode(ev.code);
             app.button_pressed(button);
