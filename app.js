@@ -26,12 +26,17 @@ wasm_init()
         function render_to_canvas(cmd) {
             if (cmd.Sprite) {
                 let pos = cmd.Sprite.position;
+                let rot = cmd.Sprite.rotation;
                 let filepath = cmd.Sprite.filepath;
 
                 let image = sprite_loader.get_sprite(`assets/${filepath}`);
                 if (image === null) return;
 
-                ctx.drawImage(image, pos.x, pos.y);
+                ctx.save();
+                ctx.translate(pos.x + image.width / 2, pos.y + image.height / 2);
+                ctx.rotate(rot);
+                ctx.drawImage(image, -image.width / 2, -image.height / 2);
+                ctx.restore();
             } else if (cmd.Polygon) {
                 ctx.strokeStyle = color_to_css(cmd.Polygon.color);
                 ctx.fillStyle = color_to_css({ ...cmd.Polygon.color, a: 0.5 });
@@ -54,7 +59,7 @@ wasm_init()
             } else if (cmd.Camera) {
                 ctx.scale(cmd.Camera.zoom.x, cmd.Camera.zoom.y);
             } else if (cmd.Clear) {
-                ctx.fillStyle = "#000";
+                ctx.fillStyle = "#000814";
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
             } else if (cmd.Rect) {
                 let pos = cmd.Rect.position;
