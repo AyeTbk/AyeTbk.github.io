@@ -25,11 +25,11 @@
     </style>
 </head>
 <body>
-    <div style="display: flex; flex-direction: column;">
+    <div style="width: 100%; display: flex; flex-direction: column;">
         <span>Tech demo de <a href="/navmesh.html">Navmesh</a></span>
         <hr/>
-        <span>Tech demo de tonte de gazon.</span>
-        <video style="width: calc(100% - 120px); margin: 20px 60px;" controls>
+        <span>Tech demo de <button onclick="window.mowgrass.style.display = 'unset'">tonte de gazon.</button></span>
+        <video id="mowgrass" style="width: calc(100% - 120px); margin: 20px 60px; display: none;" controls>
             <source src="mowgrass.mp4" type="video/mp4">
         </video>
     </div>
