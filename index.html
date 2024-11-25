@@ -10,18 +10,30 @@
             background: #131516;
             height: 100vh;
             margin: 0;
+
+            color: white;
         }
 
         canvas {
             background-color: white;
             
         }
+
+        a {
+            color: lavender;
+        }
     </style>
 </head>
-<script type="module">
-    import init from './main.js'
-    init()
-</script>
+<body>
+    <div style="display: flex; flex-direction: column;">
+        <span>Tech demo de <a href="/navmesh.html">Navmesh</a></span>
+        <hr/>
+        <span>Tech demo de tonte de gazon.</span>
+        <video style="width: calc(100% - 120px); margin: 20px 60px;" controls>
+            <source src="mowgrass.mp4" type="video/mp4">
+        </video>
+    </div>
+</body>
 
 </html>
 
